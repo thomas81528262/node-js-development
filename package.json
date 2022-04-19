@@ -1,0 +1,23 @@
+{
+  "name": "environment",
+  "version": "1.0.14",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "release-patch": "export HUSKY=0; release-it --ci",
+    "release-minor": "export HUSKY=0; release-it --ci --minor",
+    "drone:test": "DRONE_TAG=dev drone exec --secret-file .env --pipeline production",
+    "build:debian": "cd ./image/debian &&./build.sh",
+    "up": "npm run build:debian && GIT_TAG=$(git describe --abbrev=0) docker-compose --env-file .env -f compose/development.yml up --detach",
+    "down": "docker-compose --env-file .env -f compose/development.yml down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.supermicro.com:development/environment.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

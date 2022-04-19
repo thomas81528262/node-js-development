@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  development:
+    privileged: true
+    ports:
+    - "22:22"
+    - "8000-8100:8000-8100"
+    image: dev-debian:${GIT_TAG}
+    volumes:
+    - ~/docker-data:/var/lib/docker
+    - ~/dev-root:/root
